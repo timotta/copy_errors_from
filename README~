@@ -1,7 +1,7 @@
 Example
-===================
+=======
 
-# .......
+#Given one class
 
 class Categorization < ActiveRecord::Base
   belongs_to :movie
@@ -9,7 +9,7 @@ class Categorization < ActiveRecord::Base
   validates_inclusion_of :priority, :in => [1..5], :message => "has to be between 1 and 5"
 end
 
-# .......
+#And this other
 
 class Movie < ActiveRecord::Base
   #...
@@ -20,17 +20,21 @@ class Movie < ActiveRecord::Base
   end
 end
 
-# .......
+#If i 
 
-> subject = Subject.new :description => 'Comedy'
-> movie = Movie.new
-> movie.add_categorization subject, 6
-> movie.errors.entries
-[['categorization_priority','has to be between 1 and 5']]
-> movie.errors.on(:categorization_priority)
-'has to be between 1 and 5'
 
-===================
 
-Created by Tiago Albineli Motta
-http://programandosemcafeina.blogspot.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+Copyright (c) 2009 [name of plugin creator], released under the MIT license
