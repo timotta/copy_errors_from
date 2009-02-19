@@ -1,7 +1,11 @@
-Example
-=======
+Created by Tiago Albineli Motta
+http://programandosemcafeina.blogspot.com
 
-#Given one class
+
+Example
+===================
+
+# .......
 
 class Categorization < ActiveRecord::Base
   belongs_to :movie
@@ -9,7 +13,7 @@ class Categorization < ActiveRecord::Base
   validates_inclusion_of :priority, :in => [1..5], :message => "has to be between 1 and 5"
 end
 
-#And this other
+# .......
 
 class Movie < ActiveRecord::Base
   #...
@@ -20,21 +24,24 @@ class Movie < ActiveRecord::Base
   end
 end
 
-#If i 
+# .......
+
+> subject = Subject.new :description => 'Comedy'
+> movie = Movie.new
+> movie.add_categorization subject, 6
+> movie.errors.entries
+[['categorization_priority','has to be between 1 and 5']]
+> movie.errors.on(:categorization_priority)
+'has to be between 1 and 5'
 
 
 
 
+How to Install
+===================
+
+script/plugin install git://github.com/timotta/copy_errors_from.git
 
 
 
 
-
-
-
-
-
-
-
-
-Copyright (c) 2009 [name of plugin creator], released under the MIT license
