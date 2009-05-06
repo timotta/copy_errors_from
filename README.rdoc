@@ -1,0 +1,51 @@
+Created by Tiago Albineli Motta
+http://programandosemcafeina.blogspot.com
+
+= copy_errors_from
+
+Adds the method copy_errors_from on ActiveRecord::Base class.
+
+It allows a model to copy all errors that other model has.
+
+  model_a.copy_errors_from( model_b )
+
+
+== Example
+
+  # .......
+
+  class Categorization < ActiveRecord::Base
+    belongs_to :movie
+    belongs_to :subject
+    validates_inclusion_of :priority, :in => [1..5], :message => "has to be between 1 and 5"
+  end
+
+  # .......
+
+  class Movie < ActiveRecord::Base
+    #...
+    def add_categorization(subject, priority)
+      categorization = Categorization.new :subject => subject, :priority => priority 
+      self.categorizations.push = categorization
+      self.copy_errors_from( categorization ) unless save
+    end
+  end
+
+  # .......
+
+  > subject = Subject.new :description => 'Comedy'
+  > movie = Movie.new
+  > movie.add_categorization subject, 6
+  > movie.errors.entries
+  [['categorization_priority','has to be between 1 and 5']]
+  > movie.errors.on(:categorization_priority)
+  'has to be between 1 and 5'
+
+
+== How to Install
+
+script/plugin install git://github.com/timotta/copy_errors_from.git
+
+
+
+
